@@ -10,7 +10,8 @@ public enum Operation {
     DELETE(4, "DELETE"),
     CREATE_DB(5, "CREATE DATABASE"),
     ALTER_DB(6, "ALTER DATABASE"),
-    DROP_DB(7, "DROP DATABASE");
+    DROP_DB(7, "DROP DATABASE"),
+    SELECT(8, "SELECT");
 
     private int id;
     private String name;

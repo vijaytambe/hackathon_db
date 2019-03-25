@@ -73,7 +73,7 @@ public class QueryParser {
     public static void myMain(String query){
         if(query != null && !query.isBlank() && !query.isEmpty() ){
             try {
-                new QueryParser(query).extractQueryType();
+                new QueryParser(query.strip().toUpperCase()).extractQueryType();
             } catch (Exception e) {
                 e.printStackTrace();
             }
