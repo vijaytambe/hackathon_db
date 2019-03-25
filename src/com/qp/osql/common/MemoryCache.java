@@ -19,7 +19,6 @@ public class MemoryCache {
 
     public static void addNewTableToDatabase(Table table) {
 
-
     }
 
     public static void setActiveDB(Database db) {
@@ -30,7 +29,14 @@ public class MemoryCache {
         return databases;
     }
 
+    public static Database getDatabasByName(String dbName) {
+        return getDatabases().stream().filter(
+                database -> database.getName().equalsIgnoreCase(dbName)).findFirst().orElse(null);
+    }
+
     public static Database getActiveDB() {
         return activeDB;
     }
+
+
 }

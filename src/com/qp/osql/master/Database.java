@@ -24,4 +24,9 @@ public class Database {
     public boolean hasTable(String name) {
         return tables.stream().anyMatch(t -> t.getName().equals(name));
     }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
 }

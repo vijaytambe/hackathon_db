@@ -11,7 +11,8 @@ public enum Operation {
     CREATE_DB(5, "CREATE DATABASE"),
     ALTER_DB(6, "ALTER DATABASE"),
     DROP_DB(7, "DROP DATABASE"),
-    SELECT(8, "SELECT");
+    SHOW_DB(8, "SHOW DATABASE"),
+    USE_DB(9, "USE DATABASE");
 
     private int id;
     private String name;

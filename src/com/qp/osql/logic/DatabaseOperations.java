@@ -1,5 +1,6 @@
 package com.qp.osql.logic;
 
+import com.qp.osql.common.Constant;
 import com.qp.osql.common.MemoryCache;
 import com.qp.osql.master.Column;
 import com.qp.osql.master.Database;
@@ -15,12 +16,12 @@ public class DatabaseOperations {
 
         List<Database> databases = MemoryCache.getDatabases();
         if (databases.stream().anyMatch(d -> d.getName().equals(name))) {
-            return "DB already exist with this name";
+            return Constant.DB_DUPLICATE;
         }
         Database db = MemoryCache.addNewDatabase(new Database(name));
         MemoryCache.setActiveDB(db);
 
-        return "DB successfully created";
+        return Constant.DB_SUCCESS;
 
     }
 

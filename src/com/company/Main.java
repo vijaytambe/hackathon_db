@@ -39,12 +39,13 @@ public class Main {
     }
 
     private static void executeCommand() {
-        System.out.println("Executing command --> " + command);
+        System.out.print("oSQL--> ");
     }
 
     private static void printInro() {
         System.out.println("Welcome to OSQL!");
         System.out.println("Press Help for commands");
+        System.out.println("Press Select for show all DB");
     }
 
     static private void takeCommand() {
