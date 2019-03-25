@@ -1,18 +1,19 @@
 package com.qp.osql.logic;
 
-import exception.InvalidQueryException;
+import com.qp.osql.common.Constant;
+import com.qp.osql.exception.QueryException;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class QueryParser {
 
-    public void parseQuery(String userQuery){
+    public void parseQuery(String userQuery) {
 
 
     }
 
-    public void databaseCreationQueryValidator(String userQuery) throws InvalidQueryException {
+    public void databaseCreationQueryValidator(String userQuery) throws QueryException {
         List<String> queryString = Arrays.asList(userQuery.split(" "));
         isDatabaseQueryValid(userQuery, queryString);
         System.out.println("Validated!!!!");
@@ -22,13 +23,14 @@ public class QueryParser {
         // createDatabase(queryString.get(2),null);
     }
 
-    private void isDatabaseQueryValid(String userQuery, List<String> queryString) throws InvalidQueryException {
-        if(queryString.size() != 3 || !queryString.get(0).equalsIgnoreCase("create") || !queryString.get(1).equalsIgnoreCase("database")){
-            throw new InvalidQueryException("Create Database query is invalid");
+    private void isDatabaseQueryValid(String userQuery, List<String> queryString) throws QueryException {
+        if (queryString.size() != 3 || !queryString.get(0).equalsIgnoreCase("create")
+                || !queryString.get(1).equalsIgnoreCase("database")) {
+            throw new QueryException("Create Database query is invalid");
         }
     }
 
-    public void tableCreationQueryValidator(String userQuery) throws InvalidQueryException {
+    public void tableCreationQueryValidator(String userQuery) throws QueryException {
 //        List<String> queryString = Arrays.asList(userQuery.split(" "));
         isCreateTableQueryValid(userQuery, queryString);
 
@@ -39,28 +41,28 @@ public class QueryParser {
         List<String> queryString = Arrays.asList(userQuery.split(" "));
     }
 
-    public void selectTableQueryValidator(String userQuery) throws InvalidQueryException {
+    public void selectTableQueryValidator(String userQuery) throws QueryException {
 //        isQueryValid(userQuery);
     }
 
-    public String queryValidator(String userQuery){
-    return null;
+    public String queryValidator(String userQuery) {
+        return null;
 
     }
 
-    public void extractQueryType(String userQuery) throws InvalidQueryException {
-        if(userQuery.toUpperCase().startsWith(Consts.DATABASE_CREATION)){
+    public void extractQueryType(String userQuery) throws QueryException {
+        if (userQuery.toUpperCase().startsWith(Constant.DATABASE_CREATION)) {
             databaseCreationQueryValidator(userQuery);
-        }else if (userQuery.toUpperCase().startsWith(Consts.TABLE_CREATION)){
+        } else if (userQuery.toUpperCase().startsWith(Constant.TABLE_CREATION)) {
             tableCreationQueryValidator(userQuery);
-        }else if(userQuery.toUpperCase().startsWith(Consts.SELECTION_FROM_TABLE)){
+        } else if (userQuery.toUpperCase().startsWith(Constant.SELECTION_FROM_TABLE)) {
             selectTableQueryValidator(userQuery);
-        }else if (userQuery.toUpperCase().startsWith(Consts.INSERTION_INTO_TABLE)){
-            queryValidator( userQuery);
+        } else if (userQuery.toUpperCase().startsWith(Constant.INSERTION_INTO_TABLE)) {
+            queryValidator(userQuery);
         }
     }
 
-    public void createTableStructure(String operationName){
+    public void createTableStructure(String operationName) {
 
     }
 
@@ -70,7 +72,7 @@ public class QueryParser {
         QueryParser qp = new QueryParser();
         try {
             qp.extractQueryType(query.strip());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -9,7 +9,8 @@ public class OSQLDatabase {
     private static final OSQLDatabase databaseObject = new OSQLDatabase();
     private Map<String, List<OSQLDatabase>> databases = new HashMap<>();
 
-    private OSQLDatabase() {}
+    private OSQLDatabase() {
+    }
 
     public static OSQLDatabase getDatabaseObj() {
         return databaseObject;
