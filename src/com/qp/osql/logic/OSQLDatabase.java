@@ -3,7 +3,6 @@ package com.qp.osql.logic;
 import com.qp.osql.master.Database;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class OSQLDatabase {
@@ -19,7 +18,8 @@ public class OSQLDatabase {
         this.databases = databases;
     }
 
-    private OSQLDatabase() {}
+    private OSQLDatabase() {
+    }
 
     public static OSQLDatabase getDatabaseConnection() {
         return databaseConnection;

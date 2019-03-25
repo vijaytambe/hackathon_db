@@ -7,7 +7,6 @@ import com.qp.osql.exception.QueryException;
 import com.qp.osql.master.Column;
 import com.qp.osql.master.Database;
 
-import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +44,7 @@ public class QueryParser {
         List<String> queryString = Arrays.asList(userQuery.split(" "));
     }
 
-    public void selectTableQueryValidator() throws QueryException {
+    public void selectTableQueryValidator() {
 //        isQueryValid(userQuery);
     }
 
@@ -54,8 +53,12 @@ public class QueryParser {
 
     }
 
-    public int extractQueryType() throws QueryException {
-        return Operation.getByQuery(userQuery).getId();
+    public int extractQueryType() {
+        try {
+            return Integer.parseInt(userQuery);
+        } catch (Exception pe) {
+            return Operation.getByQuery(userQuery).getId();
+        }
     }
 
 
@@ -70,9 +73,8 @@ public class QueryParser {
 
                 int operation = new QueryParser(userQuery.strip().toUpperCase()).extractQueryType();
                 switch (operation) {
-                    case 0:
-                        break;
                     case 1:
+                        createTableQueryProcessor();
                         break;
                     case 2:
                         break;
@@ -93,7 +95,11 @@ public class QueryParser {
                     case 9:
                         useDB();
                         break;
+                    case 10:
+                        showAllTable();
+                        break;
                     default:
+                        showHelp();
                         break;
                 }
             } catch (Exception e) {
@@ -106,13 +112,18 @@ public class QueryParser {
 
     }
 
+    private void showHelp() {
+        Operation.getAll().forEach(operation -> System.out.println(operation.getName()));
+    }
+
+
     private void useDB() {
         Database databasByName = MemoryCache.getDatabasByName(getDBNameFromUse());
         if (databasByName != null) {
             MemoryCache.setActiveDB(databasByName);
             System.out.println(Constant.DB_USE + MemoryCache.getActiveDB().getName());
         } else
-            System.out.println( getDBNameFromUse() + Constant.DB_NOT_EXISTS);
+            System.out.println(getDBNameFromUse() + Constant.DB_NOT_EXISTS);
 
     }
 
@@ -131,6 +142,10 @@ public class QueryParser {
         System.out.println(MemoryCache.getDatabases());
     }
 
+    private void showAllTable() {
+        MemoryCache.getTablesFromActiveDB();
+    }
+
     public void createDatabaseQueryValidator() throws QueryException {
         List<String> queryString = Arrays.asList(userQuery.split(" "));
         isDatabaseQueryValid(queryString);
@@ -141,22 +156,15 @@ public class QueryParser {
         return queryString.get(2);
     }
 
-    public void tableCreationQueryValidator() {
+    public void createTableQueryProcessor() {
         List<String> queryString = Arrays.asList(userQuery.split(","));
         List<String> toGetTableName = Arrays.asList(queryString.get(0).split("\\("));
         List<String> toGetDBName = Arrays.asList(toGetTableName.get(0).split(" "));
-        String dbName = Arrays.asList(toGetDBName.get(toGetDBName.size() - 1).split("\\.")).get(0);
         String tableName = Arrays.asList(toGetDBName.get(toGetDBName.size() - 1).split("\\.")).get(1);
-        System.out.println(dbName + "  " + tableName);
-        for (int i = 1; i > queryString.size(); i++) {
-            columnNameList.add(new Column((Arrays.asList(queryString.get(i).split(" "))).get(0), null));
-//            columnNameList.add(new Column().setName((Arrays.asList(queryString.get(i).split(" "))).get(0)));
-//            columnNameList.add((Arrays.asList(queryString.get(i).split(" "))).get(0));
+        for (int i = 1; i < queryString.size(); i++) {
+            List<String> colFormatList = Arrays.asList(queryString.get(i).strip().split(" "));
+            columnNameList.add(new Column(colFormatList.get(0), null));
         }
-
-        DatabaseOperations.createTable(tableName, columnNameList);
-
+        System.out.println(DatabaseOperations.createTable(tableName, columnNameList));
     }
-
-
 }

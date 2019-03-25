@@ -1,13 +1,15 @@
 package com.company;
 
 import com.qp.osql.Run;
+import com.qp.osql.exception.QueryException;
 
 import java.util.Scanner;
 
 public class Main {
 
     private static String command;
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws QueryException {
 
         do {
 
@@ -48,7 +50,7 @@ public class Main {
         System.out.println("Press Select for show all DB");
     }
 
-    static private void takeCommand() {
+    static private void takeCommand() throws QueryException {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         String command = myObj.nextLine();
         Main.command = command;

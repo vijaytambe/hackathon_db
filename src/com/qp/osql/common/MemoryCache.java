@@ -3,7 +3,6 @@ package com.qp.osql.common;
 import com.qp.osql.master.Database;
 import com.qp.osql.master.Table;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +30,14 @@ public class MemoryCache {
 
     public static Database getDatabasByName(String dbName) {
         return getDatabases().stream().filter(
-                database -> database.getName().equalsIgnoreCase(dbName)).findFirst().orElse(null);
+                var -> var.getName().equalsIgnoreCase(dbName)).findFirst().orElse(null);
     }
 
     public static Database getActiveDB() {
         return activeDB;
     }
 
-
+    public static void getTablesFromActiveDB() {
+        System.out.println((getActiveDB() != null) ? getActiveDB().getTables() : Constant.NO_DB_SELECTED);
+    }
 }

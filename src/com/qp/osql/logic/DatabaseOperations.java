@@ -7,7 +7,6 @@ import com.qp.osql.master.Database;
 import com.qp.osql.master.Table;
 
 import java.util.List;
-import java.util.Map;
 
 public class DatabaseOperations {
 
@@ -29,11 +28,11 @@ public class DatabaseOperations {
         Database activeDB = MemoryCache.getActiveDB();
 
         if (activeDB.hasTable(tableName)) {
-            return "Table name already present";
+            return tableName + Constant.TABLE_DUPLICATE;
         }
         Table table = new Table(tableName, columns);
         activeDB.addTable(table);
-        return "Table Added Successfully";
+        return tableName + Constant.TABLE_ADDED;
 
     }
 }

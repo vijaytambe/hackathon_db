@@ -1,13 +1,11 @@
 package com.qp.osql.master;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Database {
-    String name;
-    List<Table> tables = new ArrayList<>();
+    private String name;
+    private List<Table> tables = new ArrayList<>();
 
     public Database(String name) {
         this.name = name;
@@ -25,8 +23,12 @@ public class Database {
         return tables.stream().anyMatch(t -> t.getName().equals(name));
     }
 
+    public List<Table> getTables() {
+        return tables;
+    }
+
     @Override
     public String toString() {
-        return  name;
+        return name;
     }
 }

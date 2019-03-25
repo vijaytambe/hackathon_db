@@ -4,15 +4,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Operation {
+    HELP(0, "HELP"),
     CREATE(1, "CREATE TABLE"),
-    INSERT(2, "INSERT"),
-    UPDATE(3, "UPDATE"),
-    DELETE(4, "DELETE"),
+    //    INSERT(2, "INSERT"),
+//    UPDATE(3, "UPDATE"),
+//    DELETE(4, "DELETE"),
     CREATE_DB(5, "CREATE DATABASE"),
-    ALTER_DB(6, "ALTER DATABASE"),
-    DROP_DB(7, "DROP DATABASE"),
-    SHOW_DB(8, "SHOW DATABASE"),
-    USE_DB(9, "USE DATABASE");
+    //    ALTER_DB(6, "ALTER DATABASE"),
+//    DROP_DB(7, "DROP DATABASE"),
+    SHOW_DB(8, "SHOW DATABASES"),
+    USE_DB(9, "USE DATABASE"),
+    SHOW_TABLE(10, "SHOW TABLES");
 
     private int id;
     private String name;
@@ -36,16 +38,16 @@ public enum Operation {
 
     public static Operation getByID(long ID) {
         return getAll().stream().filter(
-                operation -> operation.getId() == ID).findFirst().orElse(null);
+                var -> var.getId() == ID).findFirst().orElse(HELP);
     }
 
     public static Operation getByName(String name) {
         return getAll().stream().filter(
-                operation -> operation.getName().equals(name)).findFirst().orElse(null);
+                var -> var.getName().equals(name)).findFirst().orElse(HELP);
     }
 
     public static Operation getByQuery(String query) {
         return getAll().stream().filter(
-                operation -> query.startsWith(operation.getName())).findFirst().orElse(null);
+                var -> query.startsWith(var.getName())).findFirst().orElse(HELP);
     }
 }
