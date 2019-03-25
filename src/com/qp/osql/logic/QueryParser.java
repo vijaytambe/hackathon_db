@@ -1,4 +1,4 @@
-package parser;
+package com.qp.osql.logic;
 
 import exception.InvalidQueryException;
 
