@@ -7,21 +7,21 @@ import java.util.Map;
 
 public class Database {
     String name;
-    Map<String, List<Column>> tables = new HashMap<>();
+    List<Table> tables = new ArrayList<>();
 
-    public Map<String, List<Column>> getTables() {
-        return tables;
+    public Database(String name) {
+        this.name = name;
     }
 
-    public void setTables(Map<String, List<Column>> tables) {
-        this.tables = tables;
+    public void addTable(Table table) {
+        tables.add(table);
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public boolean hasTable(String name) {
+        return tables.stream().anyMatch(t -> t.getName().equals(name));
     }
 }
