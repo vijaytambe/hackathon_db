@@ -31,10 +31,15 @@ public class QueryParser {
     }
 
     public void tableCreationQueryValidator(String userQuery) throws QueryException {
-//        List<String> queryString = Arrays.asList(userQuery.split(" "));
-        isCreateTableQueryValid(userQuery, queryString);
 
-        // createTable(queryString.get(2),null);
+
+        List<String> queryString = Arrays.asList(userQuery.split(","));
+        List<String> toGetTableName = Arrays.asList(queryString.get(0).split("\\("));
+        List<String> toGetDBName = Arrays.asList(toGetTableName.get(0).split(" "));
+        String dbName = Arrays.asList(toGetDBName.get(toGetDBName.size()-1).split("\\.")).get(0);
+        String tableName = Arrays.asList(toGetDBName.get(toGetDBName.size()-1).split("\\.")).get(1);
+        System.out.println(dbName +"  "+tableName);
+
     }
 
     private void isCreateTableQueryValid(String userQuery) {
@@ -67,7 +72,7 @@ public class QueryParser {
     }
 
 
-    public static void main(String[] args) {
+    public static void myMain() {
         String query = "Create Database OurSQL";
         QueryParser qp = new QueryParser();
         try {

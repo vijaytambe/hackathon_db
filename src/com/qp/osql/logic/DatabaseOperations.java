@@ -41,6 +41,6 @@ public class DatabaseOperations {
         } else {
             return "No DB exists with this name";
         }
-
+        return "";
     }
 }
