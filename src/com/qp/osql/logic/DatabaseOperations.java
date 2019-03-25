@@ -14,7 +14,7 @@ public class DatabaseOperations {
     public String createDatabase(String name, List<Table> tables) {
         Map<String, Database> databases = databaseConnection.getDatabases();
 
-        if(databases.containsKey(name)){
+        if (databases.containsKey(name)) {
             return "DB already exists with this name";
         }
 
@@ -42,11 +42,11 @@ public class DatabaseOperations {
         }else {
             return "No DB exists with this name";
         }
-        return "";
     }
 
     public String insertRow(String DBname, String tableName, List<Column> columns) {
 
+        return "";
 
     }
 

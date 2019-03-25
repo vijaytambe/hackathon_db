@@ -1,5 +1,7 @@
 package com.company;
 
+import com.qp.osql.Run;
+
 import java.util.Scanner;
 
 public class Main {
@@ -45,10 +47,10 @@ public class Main {
         System.out.println("Press Help for commands");
     }
 
-    static private boolean takeCommand() {
+    static private void takeCommand() {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        String isExit = myObj.nextLine();
-        command = isExit;
-        return "exit".equals(isExit);
+        String command = myObj.nextLine();
+        Main.command = command;
+        Run.runCommand(command);
     }
 }
