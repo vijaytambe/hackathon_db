@@ -52,5 +52,6 @@ public class Main {
         String command = myObj.nextLine();
         Main.command = command;
         Run.runCommand(command);
+//        Run.runCommand("create database qp_db");
     }
 }

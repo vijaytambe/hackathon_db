@@ -7,7 +7,6 @@ public class Run {
 
     public static void runCommand(String command) {
         QueryParser.myMain(command);
-
     }
 
 }
